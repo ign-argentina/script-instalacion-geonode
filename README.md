@@ -25,12 +25,10 @@ sudo ./install_geonode.sh
 ```
 
 ## Documentación adicional
-- [Documentación GeoNode con Docker][]
+- Más información en [Documentación GeoNode con Docker][]
 - Más detalles de la instalación: [Script de Instalación GeoNode][]
 - Documentación basada en la [Guía oficial GeoNode Project][]
 
 [Documentación GeoNode con Docker]: https://docs.google.com/document/d/1tO6DbeEEz4TAMHf9J-NXkP5RBjAqU4H6-q22ImR0MgY/edit#heading=h.chrqivpm1wyh
 [Script de Instalación GeoNode]: https://docs.google.com/document/d/1FNi4P13sBJiw7O0YLdBOwlbRjP82bM4h6BmIPFjF1LY/edit#heading=h.chrqivpm1wyh
 [Guía Oficial GeoNode Project]: https://docs.geonode.org/en/master/install/advanced/project/index.html
-
-[instalación]: src/docs/deployment.md
