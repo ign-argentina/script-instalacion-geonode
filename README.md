@@ -1,7 +1,9 @@
 # Pasos para instalar GeoNode
 
+Se recomienda leer la [Documentación GeoNode con Docker][] antes de realizar la instalación.
+
 ### Crear usuario geonode
-Crear usuario, darle permisos e ingresar con el mismo
+Crear usuario, darle permisos e ingresar con el mismo.
 ```
 sudo adduser geonode
 sudo usermod -aG sudo geonode
@@ -24,12 +26,11 @@ sudo ./install_geonode.sh
 
 ## Documentación adicional
 - [Documentación GeoNode con Docker][]
-- [Script de Instalación GeoNode][]
-- [Guía oficial GeoNode Project][]
+- Más detalles de la instalación: [Script de Instalación GeoNode][]
+- Documentación basada en la [Guía oficial GeoNode Project][]
 
 [Documentación GeoNode con Docker]: https://docs.google.com/document/d/1tO6DbeEEz4TAMHf9J-NXkP5RBjAqU4H6-q22ImR0MgY/edit#heading=h.chrqivpm1wyh
 [Script de Instalación GeoNode]: https://docs.google.com/document/d/1FNi4P13sBJiw7O0YLdBOwlbRjP82bM4h6BmIPFjF1LY/edit#heading=h.chrqivpm1wyh
 [Guía Oficial GeoNode Project]: https://docs.geonode.org/en/master/install/advanced/project/index.html
 
 [instalación]: src/docs/deployment.md
-
