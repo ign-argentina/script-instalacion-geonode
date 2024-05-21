@@ -9,20 +9,29 @@ sudo adduser geonode
 sudo usermod -aG sudo geonode
 su geonode
 ```
+Luego de haber creado el usuario geonode, tenemos dos formas de realizar la instalación:
+## 1. Clonar repositorio
+Se puede clonar este repositorio en "$HOME" y ejecutar directamente el script:
+```
+sudo chmod +x install_geonode.sh
+sudo ./install_geonode.sh
+```
 
+## 2. Crear archivos manualmente
 ### Crear archivo settings.py con la personalización deseada
-Generar un settings.py, copiar la perzonalización en ese archivo y dejarlo en la misma carpeta del script, es decir "$HOME".
+Generar un settings.py, copiar la personalización en ese archivo y dejarlo en la misma carpeta del script, es decir "$HOME".
 ```
 sudo nano settings.py
 ```
 
 ### Crear script y ejecutarlo
-Crear el script en el mismo lugar que el archivo settings.py, es decir, "HOME". Luego, darle permisos y ejecutarlo.
+Crear el script en el mismo lugar que el archivo settings.py, es decir, "$HOME". Luego, darle permisos y ejecutarlo.
 ```
 sudo nano install_geonode.sh
 sudo chmod +x install_geonode.sh
 sudo ./install_geonode.sh
 ```
+**NOTA:** Durante la proceso se pedirá que se ingrese una contraseña para el GeoNode y aceptar algunas instalaciones.
 
 ## Documentación adicional
 - Más información en [Documentación GeoNode con Docker][]
