@@ -77,7 +77,7 @@ if grep -q "ALLOWED_HOSTS" .env; then
   echo "ALLOWED_HOSTS ya está configurado en el archivo .env."
 else
   echo "Agregando ALLOWED_HOSTS al archivo .env."
-  echo "ALLOWED_HOSTS="['django', '*', '$ip_address']"" >> .env
+  echo "ALLOWED_HOSTS=\"['django', '*', '$ip_address']\"" >> .env
 fi
 
 if grep -q "HTTP_HOST" .env; then
