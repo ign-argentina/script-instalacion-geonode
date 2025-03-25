@@ -35,9 +35,11 @@ cd /opt/geonode_custom/
 git clone --branch 4.1.x https://github.com/GeoNode/geonode-project.git
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 mkvirtualenv --python=/usr/bin/python3 my_geonode
+pip install --upgrade pip
 echo "...Repo clonado exitosamente!!!"
 
 # Instalación y creación de un proyecto de Django
+# pip install Django==3.2.13
 pip install Django==3.2.13
 django-admin startproject --template=./geonode-project -e py,sh,md,rst,json,yml,ini,env,sample,properties -n monitoring-cron -n Dockerfile my_geonode
 cd /opt/geonode_custom/my_geonode
@@ -122,8 +124,8 @@ echo "...Archivo .env creado exitosamente!!!"
 
 # Instalación de Docker y permisos
 curl -fsSL https://get.docker.com -o install-docker.sh
-cat install-docker.sh
-sh install-docker.sh --dry-run
+# cat install-docker.sh
+# sh install-docker.sh --dry-run
 sh install-docker.sh
 usermod -aG docker geonode
 echo "...Docker instalado exitosamente!!!"
@@ -134,7 +136,7 @@ cd /opt/geonode_custom/my_geonode
 echo "Ejecutando docker compose..."
 apt install docker-compose
 docker compose -f docker-compose.yml build --no-cache
-docker-compose -f docker-compose.yml up -d
+docker compose -f docker-compose.yml up -d
 echo "...¡¡¡Proceso completado exitosamente!!!!"
 
 # Personalización
