@@ -40,7 +40,7 @@ echo "...Repo clonado exitosamente!!!"
 
 # Instalación y creación de un proyecto de Django
 # pip install Django==3.2.13
-pip install Django==3.2.13
+pip install Django
 django-admin startproject --template=./geonode-project -e py,sh,md,rst,json,yml,ini,env,sample,properties -n monitoring-cron -n Dockerfile my_geonode
 cd /opt/geonode_custom/my_geonode
 echo "...Django instalado exitosamente!!!"
