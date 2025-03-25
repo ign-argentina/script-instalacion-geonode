@@ -133,8 +133,8 @@ cd /opt/geonode_custom/my_geonode
 # Ejecutar docker compose
 echo "Ejecutando docker compose..."
 apt install docker-compose
-docker compose -f docker compose.yml build --no-cache
-docker compose down && docker compose up -d
+docker compose -f docker-compose.yml build --no-cache
+docker-compose -f docker-compose.yml up -d
 echo "...¡¡¡Proceso completado exitosamente!!!!"
 
 # Personalización
