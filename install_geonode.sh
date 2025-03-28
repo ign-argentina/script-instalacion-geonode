@@ -43,6 +43,9 @@ echo "...Repo clonado exitosamente!!!"
 pip install Django
 django-admin startproject --template=./geonode-project -e py,sh,md,rst,json,yml,ini,env,sample,properties -n monitoring-cron -n Dockerfile my_geonode
 cd /opt/geonode_custom/my_geonode
+pip install -r src/requirements.txt --upgrade
+pip install -e src/ --upgrade
+pip install pygdal=="`gdal-config --version`.*"
 echo "...Django instalado exitosamente!!!"
 
 # Solicitar contraseña para GeoNode
@@ -133,7 +136,7 @@ echo "...Docker instalado exitosamente!!!"
 cd /opt/geonode_custom/my_geonode
 
 # Ejecutar docker compose
-echo "Ejecutando docker compose..."
+echo "EJECUTANDO DOCKER COMPOSE..."
 apt install docker-compose
 docker-compose -f docker-compose.yml build --no-cache
 docker-compose -f docker-compose.yml up -d
