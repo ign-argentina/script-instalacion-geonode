@@ -154,12 +154,26 @@ docker compose -f docker-compose.yml build --no-cache
 docker compose -f docker-compose.yml up -d
 
 # Personalización
+
+# Verificación de archivo local
+if [[ ! -f "$UBICACION_INICIAL/settings.py" ]]; then
+  echo -e "${RED}❌ No se encontró el archivo settings.py en $UBICACION_INICIAL${NC}"
+  exit 1
+fi
+
+# Verificación de contenedor
+if ! docker ps --format '{{.Names}}' | grep -q "django4my_geonode"; then
+  echo -e "${RED}❌ El contenedor django4my_geonode no está corriendo.${NC}"
+  exit 1
+fi
+
 # Descargar miniatura
+docker exec django4my_geonode mkdir -p /mnt/volumes/statics/static/mapstorestyle/img/
 docker exec django4my_geonode wget https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/0/0/0.png -O /mnt/volumes/statics/static/mapstorestyle/img/argenmap.png
 # Modificar settings.py, estando en la misma carpeta que el script
 docker cp $UBICACION_INICIAL/settings.py django4my_geonode:/usr/local/lib/python3.10/dist-packages/geonode/settings.py
+echo -e "${BLUE}🔷 ...Personalización completada exitosamente${NC}"
 
-echo "...Personalización completada exitosamente!!!"
 echo -e "${BLUE}✅ ...¡Proceso completado exitosamente!${NC}"
 
 # Reiniciar todo
