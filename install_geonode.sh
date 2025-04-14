@@ -1,9 +1,20 @@
 #!/bin/bash
 
+# Colores
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+# Log
+LOGFILE="/var/log/geonode_instalacion.log"
+exec > >(tee -a "$LOGFILE") 2>&1
+
 # Ubicación inicial
 UBICACION_INICIAL=$PWD
 
 # Instalar dependencias
+echo -e "${BLUE} Instalando dependencias...${NC}"
 apt update -y
 add-apt-repository ppa:ubuntugis/ppa
 apt update
@@ -21,29 +32,29 @@ apt purge -y
 apt clean -y
 apt install -y virtualenv virtualenvwrapper
 apt install -y vim
-echo "...Dependencias instaladas exitosamente!!!"
+echo -e "${GREEN} ...Dependencias instaladas exitosamente${NC}"
 
 # Crear directorio de trabajo
+echo -e "${BLUE} Creando directorio...${NC}"
 mkdir -p /opt/geonode_custom/
 usermod -a -G www-data geonode
 chown -Rf geonode:www-data /opt/geonode_custom/
 chmod -Rf 775 /opt/geonode_custom/
-echo "...Directorio creado exitosamente!!!"
+echo -e "${GREEN} ...Directorio creado exitosamente${NC}"
 
 # Clonar repositorio geonode-project y creación del entorno virtual de Python
 cd /opt/geonode_custom/
-git clone --branch 4.1.x https://github.com/GeoNode/geonode-project.git
+git clone --branch 4.4.x https://github.com/GeoNode/geonode-project.git
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 mkvirtualenv --python=/usr/bin/python3 my_geonode
 pip install --upgrade pip
-echo "...Repo clonado exitosamente!!!"
+echo -e "${GREEN} ...Repo clonado exitosamente${NC}"
 
 # Instalación y creación de un proyecto de Django
-# pip install Django==3.2.13
 pip install Django
 django-admin startproject --template=./geonode-project -e py,sh,md,rst,json,yml,ini,env,sample,properties -n monitoring-cron -n Dockerfile my_geonode
 cd /opt/geonode_custom/my_geonode
-echo "...Django instalado exitosamente!!!"
+echo -e "${GREEN} ...Django instalado exitosamente${NC}"
 
 # Solicitar contraseña para GeoNode
 read -sp "Ingrese la contraseña para GeoNode: " geonode_password
@@ -52,6 +63,7 @@ read -sp "Ingrese la contraseña para GeoNode: " geonode_password
 ip_address=$(hostname -I | cut -d ' ' -f1)
 
 # Crear archivo JSON con variables de entorno
+echo -e "${BLUE} Creando archivo JSON con variables...${NC}"
 cat <<EOF > envs-personalizadas.json
 {
   "hostname": "$ip_address",
@@ -62,12 +74,13 @@ cat <<EOF > envs-personalizadas.json
   "geodbpwd": "$geonode_password"
 }
 EOF
-echo "...Archivo JSON creado exitosamente!!!"
+echo -e "${GREEN} ...Archivo JSON creado exitosamente${NC}"
 
 # Crear archivo .env
 python create-envfile.py -f envs-personalizadas.json
 
 # Configuración en el archivo .env
+echo -e "${BLUE} Configurando archivo .env...${NC}"
 if grep -q "NGINX_BASE_URL" .env; then
   echo "NGINX_BASE_URL ya está configurado en el archivo .env."
 else
@@ -120,33 +133,30 @@ else
 fi
 
 cd /opt/geonode_custom/my_geonode
-echo "...Archivo .env creado exitosamente!!!"
+echo -e "${GREEN} ...Archivo .env configurado exitosamente${NC}"
 
 # Instalación de Docker y permisos
+echo -e "${BLUE} Instalando Docker...${NC}"
 curl -fsSL https://get.docker.com -o install-docker.sh
-# cat install-docker.sh
-# sh install-docker.sh --dry-run
 sh install-docker.sh
 usermod -aG docker geonode
-echo "...Docker instalado exitosamente!!!"
+echo -e "${GREEN} ...Docker instalado exitosamente${NC}"
 
 cd /opt/geonode_custom/my_geonode
 
 # Ejecutar docker compose
-echo "EJECUTANDO DOCKER COMPOSE..."
-apt install docker-compose
+echo -e "${BLUE} Ejecutando Docker Compose...${NC}"
 docker compose -f docker-compose.yml build --no-cache
 docker compose -f docker-compose.yml up -d
-echo "...¡¡¡Proceso completado exitosamente!!!!"
 
 # Personalización
 # Descargar miniatura
-docker exec django4my_geonode wget https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/0/0/0.png -O /mnt/volumes/statics/static/mapstorestyle/img/argenmap.png
-# Modificar settings.py, estando en la misma carpeta que el script
-docker cp $UBICACION_INICIAL/settings.py django4my_geonode:/usr/local/lib/python3.10/dist-packages/geonode/settings.py
-
-echo "...Personalización completada exitosamente!!!"
-echo "...¡¡¡Proceso completado exitosamente!!!!"
+# docker exec django4my_geonode wget https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/0/0/0.png -O /mnt/volumes/statics/static/mapstorestyle/img/argenmap.png
+# # Modificar settings.py, estando en la misma carpeta que el script
+# docker cp $UBICACION_INICIAL/settings.py django4my_geonode:/usr/local/lib/python3.10/dist-packages/geonode/settings.py
+# echo -e "${GREEN} ...Personalización completada exitosamente${NC}"
 
 # Reiniciar todo
 docker compose restart
+
+echo -e "${GREEN} ...¡Proceso completado exitosamente!${NC}"
