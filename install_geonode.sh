@@ -151,10 +151,10 @@ docker compose -f docker-compose.yml up -d
 
 # Personalización
 # Descargar miniatura
-# docker exec django4my_geonode wget https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/0/0/0.png -O /mnt/volumes/statics/static/mapstorestyle/img/argenmap.png
-# # Modificar settings.py, estando en la misma carpeta que el script
-# docker cp $UBICACION_INICIAL/settings.py django4my_geonode:/usr/local/lib/python3.10/dist-packages/geonode/settings.py
-# echo -e "${GREEN} ...Personalización completada exitosamente${NC}"
+docker exec django4my_geonode wget https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/0/0/0.png -O /mnt/volumes/statics/static/mapstorestyle/img/argenmap.png
+# Modificar settings.py, estando en la misma carpeta que el script
+docker cp $UBICACION_INICIAL/settings.py django4my_geonode:/usr/src/geonode/geonode/settings.py
+echo -e "${GREEN} ...Personalización completada exitosamente${NC}"
 
 # Reiniciar todo
 docker compose restart
