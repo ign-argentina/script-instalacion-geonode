@@ -2055,13 +2055,13 @@ THUMBNAIL_SIZE = {
 THUMBNAIL_BACKGROUND = {
     # class generating thumbnail's background
     # 'class': 'geonode.thumbs.background.WikiMediaTileBackground',
-    "class": "geonode.thumbs.background.OSMTileBackground",
-    # 'class': 'geonode.thumbs.background.GenericXYZBackground',
+    # "class": "geonode.thumbs.background.OSMTileBackground",
+    'class': 'geonode.thumbs.background.GenericXYZBackground',
     # initialization parameters for generator instance, valid only for generic classes
     "options": {
-        # 'url': URL for the generic xyz / tms service
-        # 'tms': False by default. Set to True if the service is TMS
-        # 'tile_size': tile size for the generic xyz service, default is 256
+       'url': 'http://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{y}.png',
+       'tms': True
+       'tile_size': 256
     },
     # example options for a TMS service
     # 'class': 'geonode.thumbs.background.GenericXYZBackground',
