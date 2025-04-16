@@ -7,8 +7,8 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 # Log
-LOGFILE="/var/log/geonode_instalacion.log"
-exec > >(tee -a "$LOGFILE") 2>&1
+LOGFILE="/var/log/geonode_instalacion_$(date +%Y-%m-%d_%H-%M-%S).log"
+exec > >(tee "$LOGFILE") 2>&1
 
 # Ubicación inicial
 UBICACION_INICIAL=$PWD
@@ -143,6 +143,8 @@ usermod -aG docker geonode
 echo -e "${GREEN} ...Docker instalado exitosamente${NC}"
 
 cd /opt/geonode_custom/my_geonode
+
+# Comentando letsencrypt4my_geonode
 sed -i '/^[[:space:]]*letsencrypt:/,/^[[:space:]]*restart:/ s/^/# /' docker-compose.yml
 
 # Ejecutar docker compose
@@ -161,3 +163,7 @@ echo -e "${GREEN} ...Personalización completada exitosamente${NC}"
 docker compose restart
 
 echo -e "${GREEN} ...¡Proceso completado exitosamente!${NC}"
+echo -e "${GREEN} ---"
+echo -e "${GREEN} El servidor GeoNode está disponible en: http://$ip_address"
+echo -e "${GREEN} El Geoserver está disponible en: http://$ip_address/geoserver"
+echo -e "${GREEN} ---${NC}"
