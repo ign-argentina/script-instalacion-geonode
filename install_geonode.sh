@@ -16,7 +16,7 @@ UBICACION_INICIAL=$PWD
 # Instalar dependencias
 echo -e "${BLUE} Instalando dependencias...${NC}"
 apt update -y
-add-apt-repository ppa:ubuntugis/ppa
+add-apt-repository -y ppa:ubuntugis/ppa
 apt update
 apt install -y python3-gdal gdal-bin libgdal-dev
 apt install -y python3-pip python3-dev python3-virtualenv python3-venv virtualenvwrapper
@@ -143,7 +143,7 @@ usermod -aG docker geonode
 echo -e "${GREEN} ...Docker instalado exitosamente${NC}"
 
 cd /opt/geonode_custom/my_geonode
-sed -i '/^[[:space:]]*letsencrypt:/,/^[[:space:]]*[a-zA-Z0-9_]*:/ s/^/# /' docker-compose.yml
+sed -i '/^[[:space:]]*letsencrypt:/,/^[[:space:]]*restart:/ s/^/# /' docker-compose.yml
 
 # Ejecutar docker compose
 echo -e "${BLUE} Ejecutando Docker Compose...${NC}"
