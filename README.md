@@ -16,7 +16,7 @@ Se puede clonar este repositorio en "$HOME" y ejecutar directamente el script de
 sudo chmod +x install_geonode.sh
 sudo ./install_geonode.sh
 ```
-**NOTA:** Durante la proceso se pedirá que se ingrese una contraseña para el GeoNode y aceptar algunas instalaciones.
+**NOTA:** Durante la proceso se pedirá que se ingrese una contraseña para el admin de Geoserver.
 
 **NOTA:** El proceso de instalación puede tardar varios minutos.
 
