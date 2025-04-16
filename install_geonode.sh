@@ -143,6 +143,7 @@ usermod -aG docker geonode
 echo -e "${GREEN} ...Docker instalado exitosamente${NC}"
 
 cd /opt/geonode_custom/my_geonode
+sed -i '/^[[:space:]]*letsencrypt:/,/^[[:space:]]*[a-zA-Z0-9_]*:/ s/^/# /' docker-compose.yml
 
 # Ejecutar docker compose
 echo -e "${BLUE} Ejecutando Docker Compose...${NC}"
