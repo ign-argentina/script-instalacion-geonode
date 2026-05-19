@@ -44,7 +44,7 @@ echo -e "${GREEN} ...Directorio creado exitosamente${NC}"
 
 # Clonar repositorio geonode-project y creación del entorno virtual de Python
 cd /opt/geonode_custom/
-git clone --branch 4.4.x https://github.com/GeoNode/geonode-project.git
+git clone https://github.com/GeoNode/geonode-project.git
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 mkvirtualenv --python=/usr/bin/python3 my_geonode
 pip install --upgrade pip
