@@ -21,6 +21,9 @@ Durante la proceso se pedirá que se ingrese una contraseña para el user "admin
 
 **NOTA:** El proceso de instalación puede tardar varios minutos.
 
+### 4. Ingreso al Geonode
+Una vez finalizada la instalación se podrá acceder a http://IP_DEL_SERVIDOR/ para el GeoNode y a http://IP_DEL_SERVIDOR/geoserver para GeoServer.
+
 ### Requisitos del Sistema
 - Máquina virtual: VirtualBox 7.0.14
 - Servidor: Ubuntu 22.04.3 Live Server amd64
