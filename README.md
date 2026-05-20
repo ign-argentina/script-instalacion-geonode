@@ -3,7 +3,7 @@
 Se recomienda leer la [Documentación GeoNode con Docker][] antes de realizar la instalación.
 
 ### 1. Crear usuario geonode
-Crear usuario, darle permisos e ingresar con el mismo.
+Crear usuario en el servidor, darle permisos e ingresar con el mismo.
 ```
 sudo adduser geonode
 sudo usermod -aG sudo geonode
