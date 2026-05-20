@@ -38,4 +38,4 @@ Una vez finalizada la instalación se podrá acceder a http://IP_DEL_SERVIDOR/ p
 - Documentación basada en la [Guía oficial GeoNode Project][]
 
 [Documentación GeoNode con Docker]: https://docs.google.com/document/d/1tO6DbeEEz4TAMHf9J-NXkP5RBjAqU4H6-q22ImR0MgY/edit#heading=h.chrqivpm1wyh
-[Guía Oficial GeoNode Project]: https://docs.geonode.org/en/master/install/advanced/project/index.html
+[Guía Oficial GeoNode Project]: https://docs.geonode.org/projects/v4/en/4.4.x/
