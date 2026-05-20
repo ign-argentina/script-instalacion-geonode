@@ -1516,15 +1516,18 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == "mapstore":
             "args": ["Empty Background", {"visibility": False}],
         },
         {
-            "type": "wms",
-            "format": "image/png",
+            "type": "tileprovider",
             "title": "Argenmap",
-            "name": "capabaseargenmap",
-            "id": "capabaseargenmap",
-            "url": "https://wms.ign.gob.ar/geoserver/ows?service=WMS&version=1.3.0&request=GetCapabilities",
+            "format": "image/png",
+            "provider": "custom",
+            "url": "https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{y}.png?flipy=true",
             "group": "background",
-            "thumbURL": f"{SITEURL}static/mapstorestyle/img/argenmap.png",
-            "visibility": True
+            "thumbURL": "https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/0/0/0.png",
+            "visibility": True,
+            "credits": {
+                "link": "https://www.ign.gob.ar/AreaServicios/Argenmap/Introduccion",
+                "title": "Instituto Geográfico Nacional + Colaboradores de OpenStreetMap",
+            },
         },
     ]
 
